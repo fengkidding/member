@@ -1,7 +1,7 @@
 package com.member.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.member.common.util.LogUtils;
+import com.member.common.util.LogBackUtils;
 import com.member.model.vo.common.ResultVO;
 import com.member.model.vo.param.MemberParamVO;
 import com.member.model.vo.param.MemberSumParamVO;
@@ -50,7 +50,7 @@ public class MemberController extends BaseController {
     @ApiOperation(value = "更新用户余额")
     @RequestMapping(value = "/update_remaining_sum", method = RequestMethod.POST)
     public ResultVO updateRemainingSum(@RequestBody @Valid MemberSumParamVO memberSumParamVO) {
-        LogUtils.info("更新用户余额: consumerUserSumParamVmo=" + JSON.toJSONString(memberSumParamVO));
+        LogBackUtils.info("更新用户余额: consumerUserSumParamVmo=" + JSON.toJSONString(memberSumParamVO));
         consumerUserService.updateRemainingSum(memberSumParamVO.getUserName(), memberSumParamVO.getRemainingSum());
         return super.resultSuccess();
     }

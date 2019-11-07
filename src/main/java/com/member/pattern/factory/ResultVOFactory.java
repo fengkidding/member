@@ -1,6 +1,5 @@
-package com.member.factory;
+package com.member.pattern.factory;
 
-import com.member.model.enums.ResultEnum;
 import com.member.model.enums.ResultEnum;
 import com.member.model.vo.common.ResultVO;
 
@@ -10,7 +9,7 @@ import com.member.model.vo.common.ResultVO;
  * @author f
  * @date 2019-10-23
  */
-public class ResultFactory {
+public class ResultVOFactory {
 
     /**
      * 饿汉，成功返回对象
@@ -25,7 +24,7 @@ public class ResultFactory {
     /**
      * 防止实例化
      */
-    private ResultFactory() {
+    private ResultVOFactory() {
     }
 
     /**
@@ -73,7 +72,7 @@ public class ResultFactory {
      */
     public static final ResultVO getFallBackResult() {
         if (null == fallBackResult) {
-            synchronized (ResultFactory.class) {
+            synchronized (ResultVOFactory.class) {
                 if (null == fallBackResult) {
                     fallBackResult = new ResultVO(ResultEnum.FALL_BACK.getCode(), ResultEnum.FALL_BACK.getMsg());
                 }

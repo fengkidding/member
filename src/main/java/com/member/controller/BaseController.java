@@ -1,10 +1,7 @@
 package com.member.controller;
 
 
-import com.member.factory.ResultFactory;
-import com.member.model.enums.ResultEnum;
-import com.member.model.vo.common.ResultVO;
-import com.member.factory.ResultFactory;
+import com.member.pattern.factory.ResultVOFactory;
 import com.member.model.enums.ResultEnum;
 import com.member.model.vo.common.ResultVO;
 
@@ -22,7 +19,7 @@ public class BaseController {
      * @return
      */
     protected ResultVO resultSuccess() {
-        return ResultFactory.getSuccessResult();
+        return ResultVOFactory.getSuccessResult();
     }
 
     /**
@@ -32,7 +29,7 @@ public class BaseController {
      * @return
      */
     protected ResultVO resultSuccess(Object object) {
-        return ResultFactory.getSuccessResult(object);
+        return ResultVOFactory.getSuccessResult(object);
     }
 
     /**
@@ -41,7 +38,7 @@ public class BaseController {
      * @return
      */
     protected ResultVO resultError() {
-        return ResultFactory.getErrorResult();
+        return ResultVOFactory.getErrorResult();
     }
 
     /**
@@ -51,6 +48,6 @@ public class BaseController {
      * @return
      */
     protected ResultVO result(ResultEnum resultEnum) {
-        return ResultFactory.getResult(resultEnum);
+        return ResultVOFactory.getResult(resultEnum);
     }
 }

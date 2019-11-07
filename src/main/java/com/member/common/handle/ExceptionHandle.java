@@ -1,17 +1,18 @@
 package com.member.common.handle;
 
-import com.member.common.util.LogUtils;
+import com.member.common.util.LogBackUtils;
 import com.member.model.enums.ResultEnum;
 import com.member.model.exception.ServiceException;
-import com.member.common.util.LogUtils;
-import com.member.factory.ResultFactory;
-import com.member.model.enums.ResultEnum;
-import com.member.model.exception.ServiceException;
+import com.member.pattern.factory.ResultVOFactory;
 import com.member.model.vo.common.ResultVO;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.util.Set;
 
 /**
  * 统一异常处理
@@ -30,8 +31,8 @@ public class ExceptionHandle {
      */
     @ExceptionHandler(BindException.class)
     public ResultVO handleError(BindException e) {
-        LogUtils.error("ExceptionHandle.BindException 抛出的异常:", e);
-        return ResultFactory.getResult(ResultEnum.VALIDATE_ERROR, e.getBindingResult().getFieldError().getDefaultMessage());
+        LogBackUtils.error("ExceptionHandle.BindException 抛出的异常:", e);
+        return ResultVOFactory.getResult(ResultEnum.VALIDATE_ERROR, e.getBindingResult().getFieldError().getDefaultMessage());
     }
 
     /**
@@ -42,8 +43,24 @@ public class ExceptionHandle {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResultVO handleError(MethodArgumentNotValidException e) {
-        LogUtils.error("ExceptionHandle.MethodArgumentNotValidException 抛出的异常:", e);
-        return ResultFactory.getResult(ResultEnum.VALIDATE_ERROR, e.getBindingResult().getFieldError().getDefaultMessage());
+        LogBackUtils.error("ExceptionHandle.MethodArgumentNotValidException 抛出的异常:", e);
+        return ResultVOFactory.getResult(ResultEnum.VALIDATE_ERROR, e.getBindingResult().getFieldError().getDefaultMessage());
+    }
+
+    /**
+     * 捕获@Validate校验抛出的异常
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResultVO handleError(ConstraintViolationException e) {
+        LogBackUtils.error("ExceptionHandle.MethodArgumentNotValidException 抛出的异常:", e);
+        Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
+        for (ConstraintViolation<?> constraintViolation : constraintViolations) {
+            return ResultVOFactory.getResult(ResultEnum.VALIDATE_ERROR, constraintViolation.getMessage());
+        }
+        return ResultVOFactory.getResult(ResultEnum.VALIDATE_ERROR);
     }
 
     /**
@@ -54,8 +71,8 @@ public class ExceptionHandle {
      */
     @ExceptionHandler(ServiceException.class)
     public ResultVO handleError(ServiceException e) {
-        LogUtils.error("ExceptionHandle.ServiceException 抛出的异常:" + e.getResultEnum(), e);
-        return ResultFactory.getResult(e.getResultEnum());
+        LogBackUtils.error("ExceptionHandle.ServiceException 抛出的异常:" + e.getResultEnum(), e);
+        return ResultVOFactory.getResult(e.getResultEnum());
     }
 
     /**
@@ -66,7 +83,7 @@ public class ExceptionHandle {
      */
     @ExceptionHandler(value = Throwable.class)
     public ResultVO handleError(Throwable e) {
-        LogUtils.error("ExceptionHandle.Throwable 抛出的异常:", e);
-        return ResultFactory.getErrorResult();
+        LogBackUtils.error("ExceptionHandle.Throwable 抛出的异常:", e);
+        return ResultVOFactory.getErrorResult();
     }
 }
