@@ -9,6 +9,16 @@ package com.member.model.constant;
 public class AuthConstant {
 
     /**
+     * id
+     */
+    public static final String MEMBER_ID = "memberId";
+
+    /**
+     * 用户名
+     */
+    public static final String USER_NAME = "userName";
+    
+    /**
      * token名称
      */
     public static final String COOKIE_NAME = "token";

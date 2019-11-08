@@ -4,7 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.member.model.constant.MemberConstant;
+import com.member.model.constant.AuthConstant;
 import com.member.model.po.auto.Member;
 
 import java.util.Date;
@@ -77,8 +77,8 @@ public class SignUtils {
     public static String generateToken(Member member, long duration) {
         Algorithm algorithm = SignUtils.getAlgorithm(signingSecret);
         String token = JWT.create()
-                .withClaim(MemberConstant.MEMBER_ID, member.getId())
-                .withClaim(MemberConstant.USER_NAME, member.getUserName())
+                .withClaim(AuthConstant.MEMBER_ID, member.getId())
+                .withClaim(AuthConstant.USER_NAME, member.getUserName())
                 .withExpiresAt(new Date(System.currentTimeMillis() + duration))
                 .sign(algorithm);
         return token;
