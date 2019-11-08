@@ -1,7 +1,6 @@
 package com.member.service;
 
-import com.member.model.vo.view.MemberVO;
-import com.member.model.vo.view.MemberVO;
+import com.member.model.po.auto.Member;
 
 /**
  * 用户信息
@@ -18,7 +17,7 @@ public interface MemberService {
      * @param password 用户密码
      * @return 用户信息
      */
-    MemberVO getUserMsg(String userName, String password);
+    Member getUserMsg(String userName, String password);
 
     /**
      * 更新用户余额

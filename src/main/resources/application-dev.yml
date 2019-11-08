@@ -155,3 +155,6 @@ redis:
     MAXWAIT: 500
     TIMEOUT: 500
     TESTON_BORROW: true
+
+# token域
+EXTERNAL_APEX: localhost
