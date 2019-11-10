@@ -158,3 +158,11 @@ redis:
 
 # token域
 EXTERNAL_APEX: localhost
+
+# 熔断
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
