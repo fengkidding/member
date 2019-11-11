@@ -11,6 +11,6 @@
   <update id="updateRemainingSum">
     update member
     set remaining_sum = remaining_sum + #{remainingSum,jdbcType=BIGINT}
-    where user_name=#{userName}
+    where user_name = #{userName}
   </update>
 </mapper>

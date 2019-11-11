@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.member.common.util.ComputeUtils;
 import com.member.common.util.LogBackUtils;
 import com.member.common.util.SessionUtils;
-import com.member.model.constant.AuthConstant;
 import com.member.model.conversion.MemberConversion;
 import com.member.model.po.auto.Member;
 import com.member.model.vo.common.ResultVO;
@@ -18,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -67,7 +65,7 @@ public class MemberController extends BaseController {
      */
     @ApiOperation(value = "更新用户余额")
     @RequestMapping(value = "/update_remaining_sum", method = RequestMethod.POST)
-    public ResultVO updateRemainingSum(@RequestBody @Valid MemberSumParamVO memberSumParamVO, HttpServletRequest request) {
+    public ResultVO updateRemainingSum(@RequestBody @Valid MemberSumParamVO memberSumParamVO) {
         LogBackUtils.info("更新用户余额: consumerUserSumParamVmo=" + JSON.toJSONString(memberSumParamVO));
         consumerUserService.updateRemainingSum(memberSumParamVO.getUserName(), memberSumParamVO.getRemainingSum());
         return super.resultSuccess();
