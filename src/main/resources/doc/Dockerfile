@@ -2,7 +2,7 @@ FROM docker.io/java
 
 MAINTAINER root
 
-COPY user.jar /app.jar
+COPY member.jar /app.jar
 
 ENV JAVA_OPTS="\
 -server \
