@@ -1,6 +1,6 @@
 package com.member.aspect;
 
-import com.member.common.util.LogBackUtils;
+import com.member.common.log.LogBackUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;

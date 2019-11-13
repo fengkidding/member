@@ -2,7 +2,7 @@ package com.member.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.member.common.util.ComputeUtils;
-import com.member.common.util.LogBackUtils;
+import com.member.common.log.LogBackUtils;
 import com.member.common.util.SessionUtils;
 import com.member.model.conversion.MemberConversion;
 import com.member.model.po.auto.Member;

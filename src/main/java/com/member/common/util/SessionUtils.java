@@ -1,6 +1,7 @@
 package com.member.common.util;
 
 import com.alibaba.fastjson.JSON;
+import com.member.common.log.LogBackUtils;
 import com.member.model.constant.AuthConstant;
 import com.member.model.po.auto.Member;
 

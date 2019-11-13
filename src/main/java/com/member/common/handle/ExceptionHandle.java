@@ -1,6 +1,6 @@
 package com.member.common.handle;
 
-import com.member.common.util.LogBackUtils;
+import com.member.common.log.LogBackUtils;
 import com.member.model.enums.ResultEnum;
 import com.member.model.exception.ServiceException;
 import com.member.pattern.factory.ResultVOFactory;
