@@ -1,4 +1,4 @@
-FROM docker.io/java
+FROM java
 
 MAINTAINER root
 
