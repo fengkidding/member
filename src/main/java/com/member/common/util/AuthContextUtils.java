@@ -16,7 +16,7 @@ public class AuthContextUtils {
      * @return
      */
     public static String getMemberId() {
-        return RequestUtils.getRequetHeader(AuthConstant.MEMBER_ID);
+        return RequestCommonUtils.getRequetHeader(AuthConstant.MEMBER_ID);
     }
 
 }

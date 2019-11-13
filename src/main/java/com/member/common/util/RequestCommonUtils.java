@@ -16,7 +16,7 @@ import java.util.Map;
  * @author f
  * @date 2019-11-13
  */
-public class RequestUtils {
+public class RequestCommonUtils {
 
     /**
      * 获取调用者ip

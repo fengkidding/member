@@ -5,7 +5,7 @@ import com.member.common.log.model.ApplicationLog;
 import com.member.common.log.model.LogApplicationContext;
 import com.member.common.log.model.LogLevel;
 import com.member.common.log.model.PerformanceLog;
-import com.member.common.util.RequestUtils;
+import com.member.common.util.RequestCommonUtils;
 import com.member.config.FinalEnvConfig;
 
 import java.time.LocalDateTime;
@@ -30,17 +30,17 @@ public class LogMsgFactory {
         log.setEnv(FinalEnvConfig.getEnv());
         log.setLogVersion("1.0.0");
         log.setLogTime(LocalDateTime.now().toString());
-        log.setTraceId(RequestUtils.getRequetHeader("trace_id"));
+        log.setTraceId(RequestCommonUtils.getRequetHeader("trace_id"));
         LogApplicationContext context = new LogApplicationContext();
-        context.setUrl(RequestUtils.getUrl());
-        context.setMethod(RequestUtils.getMethod());
-        context.setParams(JSON.toJSONString(RequestUtils.getParams()));
+        context.setUrl(RequestCommonUtils.getUrl());
+        context.setMethod(RequestCommonUtils.getMethod());
+        context.setParams(JSON.toJSONString(RequestCommonUtils.getParams()));
         log.setContext(JSON.toJSONString(context));
         log.setThreadId(Thread.currentThread().getId());
         log.setAppName(FinalEnvConfig.getAppName());
 //        log.setFilter(FinalEnvConfig.getFilter());
-        log.setServerIp(RequestUtils.getServerIp());
-        log.setClientIp(RequestUtils.getClientIp());
+        log.setServerIp(RequestCommonUtils.getServerIp());
+        log.setClientIp(RequestCommonUtils.getClientIp());
         log.setMethodName(getMethodName());
         log.setLevel(logLevel.toString());
         log.setLogMessage(logMessage);
@@ -58,10 +58,10 @@ public class LogMsgFactory {
         log.setLogVersion("1.0.0");
         log.setLogTime(LocalDateTime.now().toString());
         log.setAppName(FinalEnvConfig.getAppName());
-        log.setServerIp(RequestUtils.getServerIp());
-        log.setClientIp(RequestUtils.getClientIp());
+        log.setServerIp(RequestCommonUtils.getServerIp());
+        log.setClientIp(RequestCommonUtils.getClientIp());
 //        log.setFilter(LogHolder.getFilter());
-        log.setTraceId(RequestUtils.getRequetHeader("trace_id"));
+        log.setTraceId(RequestCommonUtils.getRequetHeader("trace_id"));
         return log;
     }
 
