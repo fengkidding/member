@@ -2,14 +2,15 @@ package com.member.aspect;
 
 import com.member.common.log.LogBackUtils;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
-import java.util.UUID;
 
 /**
  * aop
@@ -34,28 +35,28 @@ public class CommonAspect {
      * @param joinPoint
      * @param e
      */
-    @AfterThrowing(throwing = "e", pointcut = "execution(public * com.member.controller.*.*(..))")
-    public void exceptionLog(JoinPoint joinPoint, Throwable e) {
-        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = servletRequestAttributes.getRequest();
-        StringBuffer sb = new StringBuffer();
-        sb.append("AOP_EXCEPTION: url=");
-        sb.append(request.getRequestURL());
-        sb.append(",参数={");
-        Enumeration<String> enu = request.getParameterNames();
-        while (enu.hasMoreElements()) {
-            String str = enu.nextElement();
-            sb.append(str);
-            sb.append("=");
-            sb.append(request.getParameter(str));
-            sb.append(",");
-        }
-        sb.deleteCharAt(sb.length() - 1);
-        sb.append("}");
-        sb.append(",异常=");
-        sb.append(e.getMessage());
-        LogBackUtils.error(sb.toString());
-    }
+//    @AfterThrowing(throwing = "e", pointcut = "execution(public * com.member.controller.*.*(..))")
+//    public void exceptionLog(JoinPoint joinPoint, Throwable e) {
+//        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+//        HttpServletRequest request = servletRequestAttributes.getRequest();
+//        StringBuffer sb = new StringBuffer();
+//        sb.append("AOP_EXCEPTION: url=");
+//        sb.append(request.getRequestURL());
+//        sb.append(",参数={");
+//        Enumeration<String> enu = request.getParameterNames();
+//        while (enu.hasMoreElements()) {
+//            String str = enu.nextElement();
+//            sb.append(str);
+//            sb.append("=");
+//            sb.append(request.getParameter(str));
+//            sb.append(",");
+//        }
+//        sb.deleteCharAt(sb.length() - 1);
+//        sb.append("}");
+//        sb.append(",异常=");
+//        sb.append(e.getMessage());
+//        LogBackUtils.error(sb.toString());
+//    }
 
     /**
      * 请求之前执行
@@ -64,9 +65,7 @@ public class CommonAspect {
     public void doBefore(JoinPoint joinPoint) {
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = servletRequestAttributes.getRequest();
-        String uuid = UUID.randomUUID().toString();
-        request.setAttribute("traceId", uuid);
-        LogBackUtils.info("AOP_BEFORE: url=" + request.getRequestURL() + ",traceId=" + uuid + ",logTime=" + System.currentTimeMillis());
+        LogBackUtils.info("AOP_BEFORE: url=" + request.getRequestURL());
     }
 
     /**
@@ -76,7 +75,7 @@ public class CommonAspect {
     public void doAfter(JoinPoint joinPoint) {
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = servletRequestAttributes.getRequest();
-        LogBackUtils.info("AOP_AFTER: url=" + request.getRequestURL() + ",traceId=" + request.getAttribute("traceId") + ",logTime=" + System.currentTimeMillis());
+        LogBackUtils.info("AOP_AFTER: url=" + request.getRequestURL());
     }
 
 }
