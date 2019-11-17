@@ -24,14 +24,14 @@ public class MemberServiceImpl implements MemberService {
     /**
      * 获取用户信息
      *
-     * @param userName 用户名称
+     * @param memberName 用户名称
      * @param password 用户密码
      * @return 用户信息
      */
     @Override
-    public Member getUserMsg(String userName, String password) {
+    public Member getUserMsg(String memberName, String password) {
         Member member = null;
-        List<Member> list = memberExtMapper.getByNameAndPassword(userName, password);
+        List<Member> list = memberExtMapper.getByNameAndPassword(memberName, password);
         if (!CollectionUtils.isEmpty(list)) {
             member = list.get(0);
         }
@@ -41,12 +41,12 @@ public class MemberServiceImpl implements MemberService {
     /**
      * 更新用户余额
      *
-     * @param userName     用户名称
+     * @param memberId     用户id
      * @param remainingSum 用户余额
      * @return
      */
     @Override
-    public void updateRemainingSum(String userName, Long remainingSum) {
-        memberExtMapper.updateRemainingSum(userName, remainingSum);
+    public void updateRemainingSum(Integer memberId, Long remainingSum) {
+        memberExtMapper.updateRemainingSum(memberId, remainingSum);
     }
 }

@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class Member {
     private Integer id;
 
-    private String userName;
+    private String memberName;
 
     private String password;
 
@@ -25,12 +25,12 @@ public class Member {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getMemberName() {
+        return memberName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setMemberName(String memberName) {
+        this.memberName = memberName == null ? null : memberName.trim();
     }
 
     public String getPassword() {

@@ -3,7 +3,7 @@
 <mapper namespace="com.member.dao.db.auto.MemberMapper">
   <resultMap id="BaseResultMap" type="com.member.model.po.auto.Member">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_name" jdbcType="CHAR" property="userName" />
+    <result column="member_name" jdbcType="CHAR" property="memberName" />
     <result column="password" jdbcType="CHAR" property="password" />
     <result column="remaining_sum" jdbcType="BIGINT" property="remainingSum" />
     <result column="is_delete" jdbcType="BIT" property="isDelete" />
@@ -11,7 +11,7 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_name, password, remaining_sum, is_delete, create_time, update_time
+    id, member_name, password, remaining_sum, is_delete, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -24,10 +24,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.member.model.po.auto.Member">
-    insert into member (id, user_name, password, 
+    insert into member (id, member_name, password, 
       remaining_sum, is_delete, create_time, 
       update_time)
-    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=CHAR}, #{password,jdbcType=CHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{memberName,jdbcType=CHAR}, #{password,jdbcType=CHAR}, 
       #{remainingSum,jdbcType=BIGINT}, #{isDelete,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
@@ -37,8 +37,8 @@
       <if test="id != null">
         id,
       </if>
-      <if test="userName != null">
-        user_name,
+      <if test="memberName != null">
+        member_name,
       </if>
       <if test="password != null">
         password,
@@ -60,8 +60,8 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="userName != null">
-        #{userName,jdbcType=CHAR},
+      <if test="memberName != null">
+        #{memberName,jdbcType=CHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=CHAR},
@@ -83,8 +83,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.member.model.po.auto.Member">
     update member
     <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=CHAR},
+      <if test="memberName != null">
+        member_name = #{memberName,jdbcType=CHAR},
       </if>
       <if test="password != null">
         password = #{password,jdbcType=CHAR},
@@ -106,7 +106,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.member.model.po.auto.Member">
     update member
-    set user_name = #{userName,jdbcType=CHAR},
+    set member_name = #{memberName,jdbcType=CHAR},
       password = #{password,jdbcType=CHAR},
       remaining_sum = #{remainingSum,jdbcType=BIGINT},
       is_delete = #{isDelete,jdbcType=BIT},

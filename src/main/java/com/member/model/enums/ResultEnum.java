@@ -32,6 +32,10 @@ public enum ResultEnum {
      */
     FALL_BACK(4, "服务异常，触发熔断！"),
     /**
+     * 用户名或密码不正确！
+     */
+    MEMBER_NAME_PASSWORD_ERROR(5, "用户名或密码不正确！"),
+    /**
      * 校验失败
      */
     VALIDATE_ERROR(400, "校验失败！");

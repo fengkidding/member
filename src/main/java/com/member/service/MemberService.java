@@ -13,18 +13,18 @@ public interface MemberService {
     /**
      * 获取用户信息
      *
-     * @param userName 用户名称
+     * @param memberName 用户名称
      * @param password 用户密码
      * @return 用户信息
      */
-    Member getUserMsg(String userName, String password);
+    Member getUserMsg(String memberName, String password);
 
     /**
      * 更新用户余额
      *
-     * @param userName     用户名称
+     * @param memberId     用户id
      * @param remainingSum 用户余额
      * @return
      */
-    void updateRemainingSum(String userName, Long remainingSum);
+    void updateRemainingSum(Integer memberId, Long remainingSum);
 }

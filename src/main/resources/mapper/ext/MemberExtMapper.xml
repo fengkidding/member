@@ -3,14 +3,14 @@
 <mapper namespace="com.member.dao.db.ext.MemberExtMapper">
 
   <select id="getByNameAndPassword" resultType="com.member.model.po.auto.Member">
-    select id, user_name, password, remaining_sum, create_time, update_time
+    select id, member_name, password, remaining_sum, create_time, update_time
     from member
-    where user_name=#{userName} AND password=#{password}
+    where member_name=#{memberName} AND password=#{password}
   </select>
 
   <update id="updateRemainingSum">
     update member
     set remaining_sum = remaining_sum + #{remainingSum,jdbcType=BIGINT}
-    where user_name = #{userName}
+    where id = #{memberId}
   </update>
 </mapper>

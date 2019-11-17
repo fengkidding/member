@@ -78,7 +78,7 @@ public class SignUtils {
         Algorithm algorithm = SignUtils.getAlgorithm(signingSecret);
         String token = JWT.create()
                 .withClaim(AuthConstant.MEMBER_ID, member.getId())
-                .withClaim(AuthConstant.USER_NAME, member.getUserName())
+                .withClaim(AuthConstant.USER_NAME, member.getMemberName())
                 .withExpiresAt(new Date(System.currentTimeMillis() + duration))
                 .sign(algorithm);
         return token;

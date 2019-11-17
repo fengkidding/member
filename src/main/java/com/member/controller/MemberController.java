@@ -1,10 +1,12 @@
 package com.member.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.member.common.util.ComputeUtils;
 import com.member.common.log.LogBackUtils;
+import com.member.common.util.ComputeUtils;
 import com.member.common.util.SessionUtils;
 import com.member.model.conversion.MemberConversion;
+import com.member.model.enums.ResultEnum;
+import com.member.model.exception.ServiceException;
 import com.member.model.po.auto.Member;
 import com.member.model.vo.common.ResultVO;
 import com.member.model.vo.param.MemberParamVO;
@@ -46,7 +48,7 @@ public class MemberController extends BaseController {
     @ApiOperation(value = "用户登陆，获取用户信息")
     @GetMapping(value = "/get_user_msg")
     public ResultVO<MemberVO> getUserMsg(@Valid MemberParamVO memberParamVO, HttpServletResponse response) {
-        Member member = consumerUserService.getUserMsg(memberParamVO.getUserName(), memberParamVO.getPassword());
+        Member member = consumerUserService.getUserMsg(memberParamVO.getMemberName(), memberParamVO.getPassword());
         MemberVO memberVO = null;
         if (null != member) {
             memberVO = MemberConversion.CONSUMER_USER_CONVERSION.dtoToVmo(member);
@@ -67,8 +69,25 @@ public class MemberController extends BaseController {
     @RequestMapping(value = "/update_remaining_sum", method = RequestMethod.POST)
     public ResultVO updateRemainingSum(@RequestBody @Valid MemberSumParamVO memberSumParamVO) {
         LogBackUtils.info("更新用户余额: consumerUserSumParamVmo=" + JSON.toJSONString(memberSumParamVO));
-        consumerUserService.updateRemainingSum(memberSumParamVO.getUserName(), memberSumParamVO.getRemainingSum());
+        consumerUserService.updateRemainingSum(memberSumParamVO.getMemberId(), memberSumParamVO.getRemainingSum());
         return super.resultSuccess();
     }
 
+    /**
+     * 用户注销
+     *
+     * @param memberParamVO
+     * @return
+     */
+    @ApiOperation(value = "用户注销")
+    @PostMapping(value = "/login_out")
+    public ResultVO<MemberVO> loginOut(@Valid MemberParamVO memberParamVO, HttpServletResponse response) {
+        Member member = consumerUserService.getUserMsg(memberParamVO.getMemberName(), memberParamVO.getPassword());
+        if (null != member) {
+            SessionUtils.logout(externalApex, response);
+        } else {
+            throw new ServiceException(ResultEnum.MEMBER_NAME_PASSWORD_ERROR);
+        }
+        return super.resultSuccess();
+    }
 }

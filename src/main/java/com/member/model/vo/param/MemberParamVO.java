@@ -15,18 +15,18 @@ public class MemberParamVO {
 
     @ApiModelProperty(value = "用户名称")
     @NotBlank(message = "用户名称不能为空！")
-    private String userName;
+    private String memberName;
 
     @ApiModelProperty(value = "密码")
     @NotBlank(message = "密码不能为空！")
     private String password;
 
-    public String getUserName() {
-        return userName;
+    public String getMemberName() {
+        return memberName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
     }
 
     public String getPassword() {

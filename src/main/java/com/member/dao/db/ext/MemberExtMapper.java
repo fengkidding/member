@@ -17,19 +17,19 @@ public interface MemberExtMapper extends MemberMapper {
     /**
      * 获取用户信息
      *
-     * @param userName 用户名称
+     * @param memberName 用户名称
      * @param password 用户密码
      * @return
      */
-    List<Member> getByNameAndPassword(@Param("userName") String userName, @Param("password") String password);
+    List<Member> getByNameAndPassword(@Param("memberName") String memberName, @Param("password") String password);
 
     /**
      * 更新用户余额
      *
-     * @param userName     用户名称
+     * @param memberId     用户id
      * @param remainingSum 用户余额
      * @return
      */
-    int updateRemainingSum(@Param("userName") String userName, @Param("remainingSum") Long remainingSum);
+    int updateRemainingSum(@Param("memberId") Integer memberId, @Param("remainingSum") Long remainingSum);
 
 }

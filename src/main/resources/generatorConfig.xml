@@ -12,7 +12,7 @@
         <!--数据库链接URL，用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://127.0.0.1:3306/commerce?useUnicode=true&amp;characterEncoding=UTF-8"
-                        userId="root" password="aliyunm1!">
+                        userId="root" password="sql123">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
