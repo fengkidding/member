@@ -36,6 +36,10 @@ public enum ResultEnum {
      */
     MEMBER_NAME_PASSWORD_ERROR(5, "用户名或密码不正确！"),
     /**
+     * 用户未登陆！
+     */
+    MEMBER_LOGIN_ERROR(6, "用户未登陆！"),
+    /**
      * 校验失败
      */
     VALIDATE_ERROR(400, "校验失败！");
