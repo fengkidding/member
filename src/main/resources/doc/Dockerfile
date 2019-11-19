@@ -1,4 +1,4 @@
-FROM java
+FROM java:8
 
 MAINTAINER root
 
