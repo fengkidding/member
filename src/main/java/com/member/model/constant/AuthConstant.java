@@ -33,11 +33,7 @@ public class AuthConstant {
      */
     public static final long SHORT_SESSION = 3600000;
 
-    /**
-     * 日志唯一id
-     */
-    public static final String TRACE_ID = "trace_id";
-
     private AuthConstant() {
     }
 }
+

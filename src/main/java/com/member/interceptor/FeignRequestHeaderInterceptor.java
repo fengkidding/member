@@ -1,5 +1,6 @@
 package com.member.interceptor;
 
+import com.member.common.log.model.LogConstant;
 import com.member.common.util.AuthContextUtils;
 import com.member.common.util.RequestCommonUtils;
 import com.member.model.constant.AuthConstant;
@@ -30,11 +31,11 @@ public class FeignRequestHeaderInterceptor implements RequestInterceptor {
         if (StringUtils.isNotBlank(memberId)) {
             requestTemplate.header(AuthConstant.MEMBER_ID, memberId);
         }
-        String trace_id = RequestCommonUtils.getRequetHeader(AuthConstant.TRACE_ID);
+        String trace_id = RequestCommonUtils.getRequetHeader(LogConstant.TRACE_ID);
         if (StringUtils.isNotEmpty(trace_id)) {
-            requestTemplate.header(AuthConstant.TRACE_ID, trace_id);
+            requestTemplate.header(LogConstant.TRACE_ID, trace_id);
         } else {
-            requestTemplate.header(AuthConstant.TRACE_ID, UUID.randomUUID().toString());
+            requestTemplate.header(LogConstant.TRACE_ID, UUID.randomUUID().toString());
         }
     }
 }
