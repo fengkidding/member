@@ -1,11 +1,12 @@
 package com.member.common.util;
 
+import com.alibaba.fastjson.JSON;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.member.model.constant.AuthConstant;
-import com.member.model.po.auto.Member;
+import com.member.model.vo.common.TokenVO;
 
 import java.util.Date;
 import java.util.Map;
@@ -18,11 +19,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date 2019-11-07
  */
 public class SignUtils {
-
-    /**
-     * jwt密钥
-     */
-    public static final String signingSecret = "SIGNING_SECRET";
 
     /**
      * 加密算法map缓存
@@ -70,15 +66,16 @@ public class SignUtils {
     /**
      * 生成token
      *
-     * @param member   用户
+     * @param tokenVO
+     * @param secret
      * @param duration 有效期
      * @return
      */
-    public static String generateToken(Member member, long duration) {
-        Algorithm algorithm = SignUtils.getAlgorithm(signingSecret);
+    public static String generateToken(TokenVO tokenVO, String secret, long duration) {
+        Algorithm algorithm = SignUtils.getAlgorithm(secret);
         String token = JWT.create()
-                .withClaim(AuthConstant.MEMBER_ID, member.getId())
-                .withClaim(AuthConstant.USER_NAME, member.getMemberName())
+                .withClaim(AuthConstant.MEMBER_ID, tokenVO.getMemberId())
+                .withClaim(AuthConstant.TOKEN_VO, JSON.toJSONString(tokenVO))
                 .withExpiresAt(new Date(System.currentTimeMillis() + duration))
                 .sign(algorithm);
         return token;

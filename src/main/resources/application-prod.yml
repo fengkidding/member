@@ -162,9 +162,6 @@ redis:
     TIMEOUT: 500
     TESTON_BORROW: true
 
-# token域
-EXTERNAL_APEX: localhost
-
 # 熔断
 hystrix:
   command:
@@ -172,3 +169,9 @@ hystrix:
       execution:
         isolation:
           strategy: SEMAPHORE
+
+# token域
+EXTERNAL_APEX: localhost
+
+# jwt密钥
+login-secret: SIGNING_SECRET

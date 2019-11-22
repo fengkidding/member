@@ -3,7 +3,7 @@ package com.member.common.util;
 import com.alibaba.fastjson.JSON;
 import com.member.common.log.LogBackUtils;
 import com.member.model.constant.AuthConstant;
-import com.member.model.po.auto.Member;
+import com.member.model.vo.common.TokenVO;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -21,27 +21,26 @@ public class SessionUtils {
     /**
      * 用户登陆设置token
      *
-     * @param member       用户
-     * @param rememberMe   是否记住
-     * @param externalApex 域
+     * @param tokenVO
+     * @param secret
      * @param response
      */
-    public static void loginUser(Member member, boolean rememberMe, String externalApex, HttpServletResponse response) {
+    public static void loginUser(TokenVO tokenVO, String secret, HttpServletResponse response) {
         long duration;
         int maxAge;
-        if (rememberMe) {
+        if (null != tokenVO.getRememberMe() && tokenVO.getRememberMe()) {
             duration = AuthConstant.LONG_SESSION;
         } else {
             duration = AuthConstant.SHORT_SESSION;
         }
         maxAge = (int) (duration / 1000);
-        String token = SignUtils.generateToken(member, duration);
-        LogBackUtils.info("SessionUtils.loginUser param=" + JSON.toJSONString(member) + ",token=" + token);
+        String token = SignUtils.generateToken(tokenVO, secret, duration);
+        LogBackUtils.info("SessionUtils.loginUser param=" + JSON.toJSONString(tokenVO) + ",token=" + token);
 
         Cookie cookie = new Cookie(AuthConstant.COOKIE_NAME, token);
         cookie.setPath("/");
         //域
-        cookie.setDomain(externalApex);
+        cookie.setDomain(tokenVO.getExternalApex());
         //存在时间
         cookie.setMaxAge(maxAge);
         //只读

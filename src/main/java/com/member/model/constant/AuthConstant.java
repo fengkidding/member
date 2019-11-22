@@ -14,9 +14,9 @@ public class AuthConstant {
     public static final String MEMBER_ID = "memberId";
 
     /**
-     * 用户名
+     * token数据
      */
-    public static final String USER_NAME = "userName";
+    public static final String TOKEN_VO = "tokenVO";
 
     /**
      * token名称

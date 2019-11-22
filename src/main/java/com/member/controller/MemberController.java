@@ -9,6 +9,7 @@ import com.member.model.enums.ResultEnum;
 import com.member.model.exception.ServiceException;
 import com.member.model.po.auto.Member;
 import com.member.model.vo.common.ResultVO;
+import com.member.model.vo.common.TokenVO;
 import com.member.model.vo.param.MemberParamVO;
 import com.member.model.vo.param.MemberSumParamVO;
 import com.member.model.vo.view.MemberVO;
@@ -28,7 +29,7 @@ import javax.validation.Valid;
  * @author f
  * @date 2018-04-22
  */
-@Api(description = "用户接口")
+@Api(tags = {"用户接口"})
 @RestController
 @RequestMapping(value = "/member")
 public class MemberController extends BaseController {
@@ -36,8 +37,11 @@ public class MemberController extends BaseController {
     @Autowired
     private MemberService consumerUserService;
 
-    @Value("${EXTERNAL_APEX}")
+    @Value("${external-apex}")
     private String externalApex;
+
+    @Value("${login-secret}")
+    private String loginSecret;
 
     /**
      * 用户登陆，获取用户信息
@@ -54,7 +58,12 @@ public class MemberController extends BaseController {
             memberVO = MemberConversion.CONSUMER_USER_CONVERSION.dtoToVmo(member);
             memberVO.setRemainingSum(ComputeUtils.getYuan(member.getRemainingSum()));
 
-            SessionUtils.loginUser(member, true, externalApex, response);
+            TokenVO tokenVO = new TokenVO();
+            tokenVO.setRememberMe(true);
+            tokenVO.setExternalApex(externalApex);
+            tokenVO.setMemberId(member.getId());
+            tokenVO.setMemberName(member.getMemberName());
+            SessionUtils.loginUser(tokenVO, loginSecret, response);
         }
         return super.resultSuccess(memberVO);
     }
