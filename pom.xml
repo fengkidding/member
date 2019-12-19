@@ -56,6 +56,7 @@
         <mapper.version>3.5.0</mapper.version>
         <elasticsearch.version>6.0.1</elasticsearch.version>
         <jwt.version>3.6.0</jwt.version>
+        <logback.encoder.version>4.11</logback.encoder.version>
     </properties>
 
     <dependencies>
@@ -250,6 +251,13 @@
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>${jwt.version}</version>
+        </dependency>
+
+        <!-- 接入elk -->
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logback.encoder.version}</version>
         </dependency>
 
     </dependencies>
