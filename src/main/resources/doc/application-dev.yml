@@ -74,7 +74,7 @@ management:
   port: 10002
   address: 127.0.0.1
 
-#mybatis
+# mybatis
 mybatis:
   mapper-locations: classpath:mapper/*/*.xml
   type-aliases-package: com.member.model.po
@@ -82,14 +82,14 @@ mybatis:
   configuration:
       map-underscore-to-camel-case: true
 
-#pagehelper分页插件
+# pagehelper分页插件
 pagehelper:
     helperDialect: mysql
     reasonable: true
     supportMethodsArguments: true
     params: count=countSql
 
-#swagger
+# swagger
 swagger2:
     package: com.member.controller
 
@@ -145,7 +145,7 @@ druid:
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
 
-#redis
+# redis
 redis:
     ADDR: 127.0.0.1
     AUTH: redisl1

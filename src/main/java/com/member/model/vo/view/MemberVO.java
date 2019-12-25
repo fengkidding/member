@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class MemberVO {
 
     @ApiModelProperty(value = "用户名称")
-    private String userName;
+    private String memberName;
 
     @ApiModelProperty(value = "用户密码")
     private String password;
@@ -29,12 +29,12 @@ public class MemberVO {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
-    public String getUserName() {
-        return userName;
+    public String getMemberName() {
+        return memberName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
     }
 
     public String getPassword() {

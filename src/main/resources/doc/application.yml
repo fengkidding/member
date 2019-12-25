@@ -14,7 +14,7 @@ spring:
     name: member
 
 # 日志配置dev
-logback-logstash-tcp: localhost:9700
+logback-logstash-tcp: 10.128.41.7:9700
 logback-application-path: applicationLog/
 logback-performance-path: performanceLog/
 logback-max-history: 30
