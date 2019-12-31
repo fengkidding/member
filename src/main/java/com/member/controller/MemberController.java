@@ -50,7 +50,7 @@ public class MemberController extends BaseController {
      * @return
      */
     @ApiOperation(value = "用户登陆，获取用户信息")
-    @GetMapping(value = "/get_user_msg")
+    @GetMapping(value = "/get-user-msg")
     public ResultVO<MemberVO> getUserMsg(@Valid MemberParamVO memberParamVO, HttpServletResponse response) {
         Member member = consumerUserService.getUserMsg(memberParamVO.getMemberName(), memberParamVO.getPassword());
         MemberVO memberVO = null;
@@ -75,7 +75,7 @@ public class MemberController extends BaseController {
      * @return
      */
     @ApiOperation(value = "更新用户余额")
-    @RequestMapping(value = "/update_remaining_sum", method = RequestMethod.POST)
+    @RequestMapping(value = "/update-remaining-sum", method = RequestMethod.POST)
     public ResultVO updateRemainingSum(@RequestBody @Valid MemberSumParamVO memberSumParamVO) {
         LogBackUtils.info("更新用户余额: consumerUserSumParamVmo=" + JSON.toJSONString(memberSumParamVO));
         consumerUserService.updateRemainingSum(memberSumParamVO.getMemberId(), memberSumParamVO.getRemainingSum());
@@ -89,7 +89,7 @@ public class MemberController extends BaseController {
      * @return
      */
     @ApiOperation(value = "用户注销")
-    @PostMapping(value = "/login_out")
+    @PostMapping(value = "/login-out")
     public ResultVO<MemberVO> loginOut(@Valid MemberParamVO memberParamVO, HttpServletResponse response) {
         Member member = consumerUserService.getUserMsg(memberParamVO.getMemberName(), memberParamVO.getPassword());
         if (null != member) {
